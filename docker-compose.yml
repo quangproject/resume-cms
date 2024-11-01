@@ -15,20 +15,6 @@ services:
     env_file:
       - .env
 
-  cms:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - '3000:3000'
-    environment:
-      PORT: 3000
-      DATABASE_URI: mongodb+srv://ndquang5802:UBWskx677259ZChD@local-dev.olruujo.mongodb.net/resume
-      PAYLOAD_SECRET: 48aadc13ff2e1db537bc6725
-      CLOUDINARY_CLOUD_NAME: dvvlgmxvi
-      CLOUDINARY_API_KEY: 329439887783116
-      CLOUDINARY_API_SECRET: sqLeNdTq5WNCVOSCqi9ltUCP1WE
-
   mongo:
     image: mongo:latest
     ports:
