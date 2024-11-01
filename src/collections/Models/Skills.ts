@@ -1,3 +1,4 @@
+import { RowLabelArgs } from "payload/dist/admin/components/forms/RowLabel/types";
 import { GROUP } from "../../constants";
 import { CollectionConfig } from "payload/types";
 
@@ -5,26 +6,50 @@ const Skills: CollectionConfig = {
   slug: "skills",
   admin: {
     group: GROUP.MODELS,
-    useAsTitle: "skillName",
+    useAsTitle: "technologyName"
   },
   fields: [
     {
       name: "person",
       type: "relationship",
       relationTo: "users",
-      required: true,
+      required: true
     },
     {
-      name: "skillName",
+      name: "technologyName",
       type: "text",
-      required: true,
+      required: true
     },
     {
-      name: "proficiencyLevel",
-      type: "select",
-      options: ["Beginner", "Intermediate", "Advanced", "Expert"],
+      name: "technicalIcon",
+      type: "upload",
+      relationTo: "media",
+      required: true
     },
-  ],
+    {
+      name: "skills",
+      type: "array",
+      fields: [
+        {
+          name: "name",
+          type: "text",
+          required: true
+        },
+        {
+          name: "icon",
+          type: "upload",
+          relationTo: "media"
+        }
+      ],
+      admin: {
+        components: {
+          RowLabel: ({ data, index }: RowLabelArgs) => {
+            return data?.name || "New Skill";
+          },
+        },
+      },
+    }
+  ]
 };
 
 export default Skills;

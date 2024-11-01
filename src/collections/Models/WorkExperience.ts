@@ -15,30 +15,55 @@ const WorkExperience: CollectionConfig = {
       required: true,
     },
     {
-      name: "companyName",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "jobTitle",
-      type: "text",
-      required: true,
+      type: "row",
+      fields: [
+        {
+          name: "companyName",
+          type: "text",
+          required: true,
+        },
+        {
+          name: "jobTitle",
+          type: "text",
+          required: true,
+        },
+      ],
     },
     {
       name: "location",
       type: "text",
+      required: true,
     },
     {
-      name: "startDate",
-      type: "date",
-    },
-    {
-      name: "endDate",
-      type: "date",
+      type: "row",
+      fields: [
+        {
+          name: "startDate",
+          type: "date",
+          admin: {
+            date: {
+              pickerAppearance: "monthOnly",
+              displayFormat: "MMMM yyyy",
+            },
+          },
+          required: true,
+        },
+        {
+          name: "endDate",
+          type: "date",
+          admin: {
+            date: {
+              pickerAppearance: "monthOnly",
+              displayFormat: "MMMM yyyy",
+            },
+          },
+        },
+      ],
     },
     {
       name: "description",
-      type: "textarea",
+      type: "richText",
+      required: true,
     },
   ],
 };

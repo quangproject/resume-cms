@@ -15,29 +15,49 @@ const Education: CollectionConfig = {
       required: true,
     },
     {
-      name: "institutionName",
-      type: "text",
-      required: true,
-    },
-    {
-      name: "degree",
-      type: "text",
+      type: "row",
+      fields: [
+        {
+          name: "institutionName",
+          type: "text",
+          required: true,
+        },
+        {
+          name: "degree",
+          type: "text",
+          required: true,
+        },
+      ],
     },
     {
       name: "fieldOfStudy",
       type: "text",
+      required: true,
     },
     {
-      name: "startDate",
-      type: "date",
-    },
-    {
-      name: "endDate",
-      type: "date",
+      type: "row",
+      fields: [
+        {
+          name: "startDate",
+          type: "date",
+          admin: {
+            date: {
+              pickerAppearance: "monthOnly",
+              displayFormat: "MMMM yyyy",
+            },
+          },
+          required: true,
+        },
+        {
+          name: "endDate",
+          type: "date",
+        },
+      ],
     },
     {
       name: "description",
-      type: "textarea",
+      type: "richText",
+      required: true,
     },
   ],
 };
