@@ -1,3 +1,4 @@
+import afterChangeHook from "../../hooks/afterChange";
 import { GROUP } from "../../constants";
 import { CollectionConfig } from "payload/types";
 
@@ -15,24 +16,24 @@ const Contacts: CollectionConfig = {
       required: true,
     },
     {
-      name: "fullName",
-      type: "text",
-      required: true,
-    },
-    {
       type: "row",
       fields: [
+        {
+          name: "fullName",
+          type: "text",
+          required: true,
+        },
         {
           name: "email",
           type: "email",
           required: true,
         },
-        {
-          name: "telephone",
-          type: "text",
-          required: true,
-        },
       ],
+    },
+    {
+      name: "subject",
+      type: "text",
+      required: true,
     },
     {
       name: "message",
@@ -40,6 +41,9 @@ const Contacts: CollectionConfig = {
       required: true,
     },
   ],
+  hooks: {
+    afterChange: [afterChangeHook],
+  },
 };
 
 export default Contacts;
