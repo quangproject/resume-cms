@@ -1,4 +1,5 @@
 import Certifications from "./Certifications";
+import Contacts from "./Contact";
 import Education from "./Education";
 import Interests from "./Interests";
 import Languages from "./Languages";
@@ -14,4 +15,5 @@ export default [
   Languages,
   Certifications,
   Interests,
+  Contacts,
 ];
