@@ -15,6 +15,21 @@ app.get("/", (_, res) => {
 const start = async () => {
   // Initialize Payload
   await payload.init({
+    email: {
+      transportOptions: {
+        host: process.env.SMTP_HOST,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS,
+        },
+        port: Number(process.env.SMTP_HOST),
+        secure: Number(process.env.SMTP_PORT) === 465, // true for port 465, false (the default) for 587 and others
+        requireTLS: true,
+      },
+      fromName: process.env.FROM_NAME,
+      fromAddress: process.env.FROM_ADDRESS,
+      logMockCredentials: true,
+    },
     secret: process.env.PAYLOAD_SECRET,
     express: app,
     onInit: async () => {
@@ -25,7 +40,9 @@ const start = async () => {
   // Add your own express routes here
 
   app.listen(process.env.PORT || 3000, () => {
-    console.log(`Server is running on http://localhost:${process.env.PORT || 3000}`);
+    console.log(
+      `Server is running on http://localhost:${process.env.PORT || 3000}`
+    );
   });
 };
 
