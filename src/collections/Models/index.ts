@@ -1,7 +1,6 @@
 import Certifications from "./Certifications";
 import Contacts from "./Contact";
 import Education from "./Education";
-import Interests from "./Interests";
 import Languages from "./Languages";
 import Projects from "./Projects";
 import Skills from "./Skills";
@@ -14,6 +13,5 @@ export default [
   Projects,
   Languages,
   Certifications,
-  Interests,
-  Contacts,
+  Contacts
 ];

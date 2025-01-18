@@ -1,18 +1,20 @@
 import { GROUP } from "../../constants";
 import { CollectionConfig } from "payload/types";
 
+const SLUG = "work-experiences";
+
 const WorkExperience: CollectionConfig = {
-  slug: "work-experience",
+  slug: SLUG,
   admin: {
     group: GROUP.MODELS,
-    useAsTitle: "companyName",
+    useAsTitle: "companyName"
   },
   fields: [
     {
       name: "person",
       type: "relationship",
       relationTo: "users",
-      required: true,
+      required: true
     },
     {
       type: "row",
@@ -20,19 +22,19 @@ const WorkExperience: CollectionConfig = {
         {
           name: "companyName",
           type: "text",
-          required: true,
+          required: true
         },
         {
           name: "jobTitle",
           type: "text",
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       name: "location",
       type: "text",
-      required: true,
+      required: true
     },
     {
       type: "row",
@@ -43,10 +45,10 @@ const WorkExperience: CollectionConfig = {
           admin: {
             date: {
               pickerAppearance: "monthOnly",
-              displayFormat: "MMMM yyyy",
-            },
+              displayFormat: "MMMM yyyy"
+            }
           },
-          required: true,
+          required: true
         },
         {
           name: "endDate",
@@ -54,18 +56,37 @@ const WorkExperience: CollectionConfig = {
           admin: {
             date: {
               pickerAppearance: "monthOnly",
-              displayFormat: "MMMM yyyy",
-            },
-          },
-        },
-      ],
+              displayFormat: "MMMM yyyy"
+            }
+          }
+        }
+      ]
     },
     {
       name: "description",
       type: "richText",
-      required: true,
-    },
+      required: true
+    }
   ],
+  endpoints: [
+    {
+      path: "/:id/user",
+      method: "get",
+      handler: async (req, res, next) => {
+        const userId = req.params.id;
+        const educations = await req.payload.find({
+          collection: SLUG,
+          where: {
+            person: {
+              equals: userId
+            }
+          }
+        });
+
+        return res.status(200).send(educations);
+      }
+    }
+  ]
 };
 
 export default WorkExperience;

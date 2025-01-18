@@ -1,18 +1,20 @@
 import { GROUP } from "../../constants";
 import { CollectionConfig } from "payload/types";
 
+const SLUG = "educations";
+
 const Education: CollectionConfig = {
-  slug: "education",
+  slug: SLUG,
   admin: {
     group: GROUP.MODELS,
-    useAsTitle: "institutionName",
+    useAsTitle: "institutionName"
   },
   fields: [
     {
       name: "person",
       type: "relationship",
       relationTo: "users",
-      required: true,
+      required: true
     },
     {
       type: "row",
@@ -20,19 +22,19 @@ const Education: CollectionConfig = {
         {
           name: "institutionName",
           type: "text",
-          required: true,
+          required: true
         },
         {
           name: "degree",
           type: "text",
-          required: true,
-        },
-      ],
+          required: true
+        }
+      ]
     },
     {
       name: "fieldOfStudy",
       type: "text",
-      required: true,
+      required: true
     },
     {
       type: "row",
@@ -43,23 +45,42 @@ const Education: CollectionConfig = {
           admin: {
             date: {
               pickerAppearance: "monthOnly",
-              displayFormat: "MMMM yyyy",
-            },
+              displayFormat: "MMMM yyyy"
+            }
           },
-          required: true,
+          required: true
         },
         {
           name: "endDate",
-          type: "date",
-        },
-      ],
+          type: "date"
+        }
+      ]
     },
     {
       name: "description",
       type: "richText",
-      required: true,
-    },
+      required: true
+    }
   ],
+  endpoints: [
+    {
+      path: "/:id/user",
+      method: "get",
+      handler: async (req, res, next) => {
+        const userId = req.params.id;
+        const educations = await req.payload.find({
+          collection: SLUG,
+          where: {
+            person: {
+              equals: userId
+            }
+          }
+        });
+
+        return res.status(200).send(educations);
+      }
+    }
+  ]
 };
 
 export default Education;
