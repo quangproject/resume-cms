@@ -21,12 +21,12 @@ export default buildConfig({
   graphQL: {
     schemaOutputFile: path.resolve(__dirname, "generated-schema.graphql")
   },
-  plugins: [payloadCloud(), cloudinaryPlugin()],
+  plugins: [payloadCloud()],
   db: mongooseAdapter({
     url: process.env.DATABASE_URI
   }),
   rateLimit: {
-    skip: (req) => true
+    skip: () => true
   },
-  cors: "*" // Allow all origins
+  cors: "*"
 });

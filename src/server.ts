@@ -1,11 +1,13 @@
 import express from "express";
 import payload from "payload";
 import { mediaManagement } from "payload-cloudinary-plugin";
+import { CollectionConfig } from "payload/types";
 
 require("dotenv").config();
 const app = express();
+const port = process.env.PORT || 3000;
 
-app.use(mediaManagement());
+// app.use(mediaManagement());
 
 // Redirect root to Admin panel
 app.get("/", (_, res) => {
@@ -20,29 +22,25 @@ const start = async () => {
         host: process.env.SMTP_HOST,
         auth: {
           user: process.env.SMTP_USER,
-          pass: process.env.SMTP_PASS,
+          pass: process.env.SMTP_PASS
         },
         port: Number(process.env.SMTP_HOST),
         secure: Number(process.env.SMTP_PORT) === 465, // true for port 465, false (the default) for 587 and others
-        requireTLS: true,
+        requireTLS: true
       },
       fromName: process.env.FROM_NAME,
       fromAddress: process.env.FROM_ADDRESS,
-      logMockCredentials: true,
+      logMockCredentials: true
     },
     secret: process.env.PAYLOAD_SECRET,
     express: app,
     onInit: async () => {
       payload.logger.info(`Payload Admin URL: ${payload.getAdminURL()}`);
-    },
+    }
   });
 
-  // Add your own express routes here
-
-  app.listen(process.env.PORT || 3000, () => {
-    console.log(
-      `Server is running on http://localhost:${process.env.PORT || 3000}`
-    );
+  app.listen(port, () => {
+    console.log(`Server is running on http://localhost:${port}`);
   });
 };
 

@@ -1,5 +1,10 @@
 import { GROUP } from "../../constants";
-import { CollectionConfig } from "payload/types";
+import { CollectionConfig, Field } from "payload/types";
+import { CLOUDINARY_GROUP_FIELDS, CLOUDINARY_GROUP_NAME } from "../../type";
+import beforeChangeHook from "./hooks/beforeChange";
+import afterDeleteHook from "./hooks/afterDelete";
+
+const allowedMimeTypes = ["image/*"];
 
 const Media: CollectionConfig = {
   slug: "media",
@@ -13,13 +18,7 @@ const Media: CollectionConfig = {
   upload: {
     staticURL: "/resume-cms/media",
     staticDir: "resume-cms/media",
-    mimeTypes: [
-      "image/jpeg",
-      "image/png",
-      "image/gif",
-      "image/svg+xml",
-      "application/pdf"
-    ], // Allow only image formats
+    mimeTypes: allowedMimeTypes,
     disableLocalStorage: true,
     imageSizes: [
       {
@@ -47,8 +46,18 @@ const Media: CollectionConfig = {
       name: "altText",
       type: "text",
       label: "Alt Text"
+    },
+    {
+      name: CLOUDINARY_GROUP_NAME,
+      type: "group",
+      fields: CLOUDINARY_GROUP_FIELDS as Field[],
+      admin: { readOnly: true }
     }
-  ]
+  ],
+  hooks: {
+    beforeChange: [beforeChangeHook],
+    afterDelete: [afterDeleteHook]
+  }
 };
 
 export default Media;

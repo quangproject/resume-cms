@@ -5,12 +5,12 @@ const afterChangeHook: CollectionAfterChangeHook = async ({
   doc, // full document data
   req, // full express request
   previousDoc, // document data before updating the collection
-  operation, // name of the operation ie. 'create', 'update'
+  operation // name of the operation ie. 'create', 'update'
 }) => {
   if (operation === "create") {
     const user = await payload.find({
       collection: "users",
-      where: { id: doc.person },
+      where: { id: doc.person }
     });
 
     const message = {
@@ -18,7 +18,7 @@ const afterChangeHook: CollectionAfterChangeHook = async ({
       to: user.docs[0].email,
       subject: doc.subject,
       html: `From ${doc.fullName} (${doc.email}) <br><br> ${doc.message}
-      `,
+      `
     };
 
     payload.sendEmail(message);

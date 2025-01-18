@@ -85,9 +85,9 @@ const Users: CollectionConfig = {
       ]
     },
     {
-      name: "avatar", // Field for the profile picture
+      name: "avatar",
       type: "upload",
-      relationTo: "media" // Relates to the Media collection
+      relationTo: "media"
     }
   ]
 };
