@@ -20,24 +20,6 @@ const Media: CollectionConfig = {
     staticDir: "resume-cms/media",
     mimeTypes: allowedMimeTypes,
     disableLocalStorage: true,
-    imageSizes: [
-      {
-        name: "small",
-        width: 320,
-        height: 240
-      },
-      {
-        name: "medium",
-        width: 640,
-        height: 480
-      },
-      {
-        name: "large",
-        width: 1280,
-        height: 960
-      }
-    ],
-    adminThumbnail: "small",
     crop: true,
     focalPoint: true
   },
@@ -56,7 +38,20 @@ const Media: CollectionConfig = {
   ],
   hooks: {
     beforeChange: [beforeChangeHook],
-    afterDelete: [afterDeleteHook]
+    afterDelete: [afterDeleteHook],
+    afterRead: [
+      ({
+        doc, // full document data
+        req, // full express request
+        query, // JSON formatted query
+        findMany // boolean to denote if this hook is running against finding one, or finding many
+      }) => {
+        return {
+          ...doc,
+          url: doc[CLOUDINARY_GROUP_NAME]?.secure_url
+        };
+      }
+    ]
   }
 };
 

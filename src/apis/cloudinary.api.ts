@@ -5,7 +5,7 @@ class CloudinaryAPI {
     return axiosClient({
       url: "/cloudinary/upload",
       method: "POST",
-      baseURL: process.env.CLOUDINARY_SERVICE_URL,
+      baseURL: process.env.GATEWAY_URL,
       data: formData,
       auth: {
         username: process.env.CLOUDINARY_SERVICE_BASIC_AUTH_USERNAME,
@@ -18,7 +18,7 @@ class CloudinaryAPI {
     return axiosClient({
       url: "/cloudinary/delete",
       method: "POST",
-      baseURL: process.env.CLOUDINARY_SERVICE_URL,
+      baseURL: process.env.GATEWAY_URL,
       data: {
         publicId,
         resourceType

@@ -1,13 +1,9 @@
 import express from "express";
 import payload from "payload";
-import { mediaManagement } from "payload-cloudinary-plugin";
-import { CollectionConfig } from "payload/types";
 
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
-
-// app.use(mediaManagement());
 
 // Redirect root to Admin panel
 app.get("/", (_, res) => {

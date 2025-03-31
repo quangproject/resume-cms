@@ -52,7 +52,13 @@ const Education: CollectionConfig = {
         },
         {
           name: "endDate",
-          type: "date"
+          type: "date",
+          admin: {
+            date: {
+              pickerAppearance: "monthOnly",
+              displayFormat: "MMMM yyyy"
+            }
+          }
         }
       ]
     },

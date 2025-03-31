@@ -36,7 +36,20 @@ const File: CollectionConfig = {
   ],
   hooks: {
     beforeChange: [beforeChangeHook],
-    afterDelete: [afterDeleteHook]
+    afterDelete: [afterDeleteHook],
+    afterRead: [
+      ({
+        doc, // full document data
+        req, // full express request
+        query, // JSON formatted query
+        findMany // boolean to denote if this hook is running against finding one, or finding many
+      }) => {
+        return {
+          ...doc,
+          url: doc[CLOUDINARY_GROUP_NAME]?.secure_url
+        };
+      }
+    ]
   }
 };
 

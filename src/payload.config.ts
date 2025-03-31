@@ -6,7 +6,6 @@ import { slateEditor } from "@payloadcms/richtext-slate";
 import { buildConfig } from "payload/config";
 import Users from "./collections/Overviews/Users";
 import collections from "./collections";
-import cloudinaryPlugin from "payload-cloudinary-plugin/dist/plugins";
 
 export default buildConfig({
   admin: {

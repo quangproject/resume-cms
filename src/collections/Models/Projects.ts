@@ -48,10 +48,6 @@ const Projects: CollectionConfig = {
       ]
     },
     {
-      name: "link",
-      type: "text"
-    },
-    {
       name: "description",
       type: "richText",
       required: true
